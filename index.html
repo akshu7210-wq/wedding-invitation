@@ -752,6 +752,95 @@ button { font: inherit; color: inherit; }
 }
 </style>
 
+
+<style>
+/* ===== HIDE SCROLL CUE AT THE END ===== */
+.scroll-cue,
+.scroll-down,
+.scroll-indicator,
+.scroll-arrow,
+#scrollCue,
+#scrollDown {
+  transition: opacity .45s ease, transform .45s ease, visibility .45s ease !important;
+}
+
+body.at-page-end .scroll-cue,
+body.at-page-end .scroll-down,
+body.at-page-end .scroll-indicator,
+body.at-page-end .scroll-arrow,
+body.at-page-end #scrollCue,
+body.at-page-end #scrollDown {
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transform:translateY(8px) !important;
+}
+</style>
+
+
+<style>
+/* ===== PREMIUM FLOATING SCROLL ARROW ===== */
+#weddingScrollCue{
+  position:fixed;
+  left:50%;
+  bottom:max(20px, env(safe-area-inset-bottom));
+  z-index:999;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:1px solid rgba(212,183,122,.55);
+  background:rgba(255,250,241,.78);
+  box-shadow:0 10px 30px rgba(36,33,29,.13);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  color:#A88B55;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translate(-50%,8px);
+  transition:opacity .5s ease, transform .5s ease, visibility .5s ease;
+}
+
+#weddingScrollCue svg{
+  width:20px;
+  height:20px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  animation:weddingArrowFloat 1.65s ease-in-out infinite;
+}
+
+body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
+
+@keyframes weddingArrowFloat{
+  0%,100%{transform:translateY(-3px)}
+  50%{transform:translateY(4px)}
+}
+
+@media(max-width:759px){
+  #weddingScrollCue{
+    width:38px;
+    height:38px;
+    bottom:max(16px, env(safe-area-inset-bottom));
+  }
+  #weddingScrollCue svg{width:18px;height:18px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #weddingScrollCue svg{animation:none}
+}
+</style>
+
 </head>
 <body class="intro-active">
 
@@ -1632,6 +1721,101 @@ button { font: inherit; color: inherit; }
     document.addEventListener('DOMContentLoaded', initMovingEventDot);
   } else {
     initMovingEventDot();
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  var ticking = false;
+
+  function updateScrollCueAtEnd(){
+    ticking = false;
+
+    var doc = document.documentElement;
+    var maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+    var nearBottom = window.scrollY >= (maxScroll - 80);
+
+    /* Also hide once the closing/final section is substantially visible. */
+    var closing = document.querySelector('#closing, .closing, .final-section, footer');
+    if (closing) {
+      var r = closing.getBoundingClientRect();
+      if (r.top <= window.innerHeight * 0.72) nearBottom = true;
+    }
+
+    document.body.classList.toggle('at-page-end', nearBottom);
+  }
+
+  function requestUpdate(){
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateScrollCueAtEnd);
+    }
+  }
+
+  window.addEventListener('scroll', requestUpdate, {passive:true});
+  window.addEventListener('resize', requestUpdate);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateScrollCueAtEnd);
+  } else {
+    updateScrollCueAtEnd();
+  }
+})();
+</script>
+
+
+<button id="weddingScrollCue" type="button" aria-label="Scroll down">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M6.5 9.5 12 15l5.5-5.5"/>
+  </svg>
+</button>
+
+
+<script>
+(function(){
+  var cue = document.getElementById('weddingScrollCue');
+  if(!cue) return;
+
+  function showAfterOpening(){
+    /* Existing invitation opening should finish before the cue appears. */
+    setTimeout(function(){
+      document.body.classList.add('scroll-cue-ready');
+    }, 1800);
+  }
+
+  function updateEndState(){
+    var doc = document.documentElement;
+    var maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+    var atEnd = window.scrollY >= maxScroll - 90;
+
+    var closing = document.querySelector('#closing, .closing, .final-section, footer');
+    if(closing){
+      var r = closing.getBoundingClientRect();
+      if(r.top <= window.innerHeight * .72) atEnd = true;
+    }
+    document.body.classList.toggle('at-page-end', atEnd);
+  }
+
+  cue.addEventListener('click', function(){
+    window.scrollBy({
+      top: Math.max(window.innerHeight * .78, 420),
+      behavior:'smooth'
+    });
+  });
+
+  window.addEventListener('scroll', updateEndState, {passive:true});
+  window.addEventListener('resize', updateEndState);
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      showAfterOpening();
+      updateEndState();
+    });
+  } else {
+    showAfterOpening();
+    updateEndState();
   }
 })();
 </script>
