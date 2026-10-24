@@ -2,6 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+
+<!-- WhatsApp / Social Link Preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nikhil &amp; Shweta | Wedding Invitation">
+<meta property="og:description" content="Join us in celebrating our wedding on 13 December 2026.">
+<meta property="og:url" content="https://nikhil-weds-shweta.pages.dev/">
+<meta property="og:image" content="https://nikhil-weds-shweta.pages.dev/wedding-preview.png">
+<meta property="og:image:secure_url" content="https://nikhil-weds-shweta.pages.dev/wedding-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Nikhil and Shweta Wedding Invitation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nikhil &amp; Shweta | Wedding Invitation">
+<meta name="twitter:description" content="Join us in celebrating our wedding on 13 December 2026.">
+<meta name="twitter:image" content="https://nikhil-weds-shweta.pages.dev/wedding-preview.png">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wedding Invitation</title>
 <meta name="theme-color" content="#1b1916">
@@ -838,6 +853,17 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
 
 @media(prefers-reduced-motion:reduce){
   #weddingScrollCue svg{animation:none}
+}
+</style>
+
+
+<style>
+/* ===== PERSONALIZED GUEST NAME ===== */
+.dynamic-guest-name{
+  display:inline-block;
+  color:var(--wine, #7A2E32);
+  font-family:"Cormorant Garamond", Georgia, serif;
+  font-weight:600;
 }
 </style>
 
@@ -1816,6 +1842,67 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   } else {
     showAfterOpening();
     updateEndState();
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  function getGuestName(){
+    var params = new URLSearchParams(window.location.search);
+    var raw = (params.get('guest') || '').trim();
+    if(!raw) return 'Family & Friends';
+
+    /* Keep shared links safe and tidy. */
+    raw = raw.replace(/\s+/g, ' ').slice(0, 70);
+    return raw;
+  }
+
+  function applyGuestName(){
+    var guest = getGuestName();
+
+    /* Prefer an existing guest-name element if the invitation already has one. */
+    var targets = document.querySelectorAll(
+      '[data-guest-name], #guestName, .guest-name, .guestName'
+    );
+
+    if(targets.length){
+      targets.forEach(function(el){
+        el.textContent = guest;
+        el.classList.add('dynamic-guest-name');
+      });
+      return;
+    }
+
+    /* Otherwise locate the personalized invitation section and insert the name. */
+    var section =
+      document.querySelector('#guest, #invitation, .guest-invitation, .personalized-invitation') ||
+      Array.from(document.querySelectorAll('section')).find(function(sec){
+        return /guest|invitation/i.test(sec.textContent || '');
+      });
+
+    if(section){
+      var heading = section.querySelector('h1,h2,h3,.title,.section-title');
+      var line = document.createElement('div');
+      line.className = 'dynamic-guest-name';
+      line.setAttribute('data-guest-name','');
+      line.style.cssText =
+        'font-size:clamp(28px,7vw,46px);margin:12px 0 10px;text-align:center;';
+      line.textContent = guest;
+
+      if(heading && heading.parentNode){
+        heading.insertAdjacentElement('afterend', line);
+      }else{
+        section.prepend(line);
+      }
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyGuestName);
+  }else{
+    applyGuestName();
   }
 })();
 </script>
