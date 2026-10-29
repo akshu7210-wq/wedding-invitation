@@ -924,6 +924,31 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
 
 </style>
 
+
+<style>
+/* ===== DESKTOP HERO PHOTO FRAMING =====
+   Keep the couple's faces visible on wide laptop/desktop screens. */
+@media (min-width: 601px) {
+  #couple .bgw img {
+    object-position: 50% 15% !important;
+  }
+}
+</style>
+
+
+<style>
+/* ===== HERO PHOTO CLARITY TUNE ===== */
+/* Slightly brighter/clearer hero while preserving text readability. */
+#couple::after {
+  background:
+    radial-gradient(ellipse at center, rgba(20,17,14,.10), rgba(20,17,14,.64)),
+    linear-gradient(180deg, rgba(20,17,14,.22), transparent 34%, rgba(20,17,14,.56)) !important;
+}
+#couple.in .bgw img {
+  filter: brightness(1.10) contrast(1.03) saturate(1.04) !important;
+}
+</style>
+
 </head>
 <body class="intro-active">
 
