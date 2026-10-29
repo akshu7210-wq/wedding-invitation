@@ -5,7 +5,7 @@
 
 <!-- WhatsApp / Social Link Preview -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Nikhil &amp; Shweta | Wedding Invitation">
+<meta property="og:title" content="NIKHIL &amp; SHWETA | Wedding Invitation">
 <meta property="og:description" content="Join us in celebrating our wedding on 13 December 2026.">
 <meta property="og:url" content="https://nikhil-weds-shweta.pages.dev/">
 <meta property="og:image" content="https://nikhil-weds-shweta.pages.dev/wedding-preview.jpg?v=4">
@@ -15,7 +15,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Nikhil and Shweta Wedding Invitation">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nikhil &amp; Shweta | Wedding Invitation">
+<meta name="twitter:title" content="NIKHIL &amp; SHWETA | Wedding Invitation">
 <meta name="twitter:description" content="Join us in celebrating our wedding on 13 December 2026.">
 <meta name="twitter:image" content="https://nikhil-weds-shweta.pages.dev/wedding-preview.jpg?v=4">
 
@@ -671,6 +671,16 @@ button { font: inherit; color: inherit; }
 
 
 <style>
+/* ===== GUEST SIGNATURE AMPERSAND — original color restored ===== */
+#guestSec .guest-couple-amp {
+  color:var(--champ-d);
+  -webkit-text-fill-color:var(--champ-d);
+  font-style:italic;
+  display:inline-block;
+  margin:0 .10em;
+  transform:translateY(-.03em);
+}
+
 /* ===== SCROLL-FOLLOWING EVENT TIMELINE DOT ===== */
 #events .ev-grid { --scroll-dot-y: 12px; }
 
@@ -687,8 +697,8 @@ button { font: inherit; color: inherit; }
   border:2px solid var(--ivory);
   box-shadow:0 0 0 5px rgba(168,145,95,.16), 0 4px 14px rgba(36,33,29,.18);
   transform:translate(-50%, var(--scroll-dot-y));
-  transition:transform .10s linear;
-  will-change:transform;
+  transition:opacity .28s ease;
+  will-change:transform, opacity;
 }
 
 @media (min-width:760px){
@@ -767,6 +777,38 @@ button { font: inherit; color: inherit; }
     transition:none !important;
   }
 }
+</style>
+
+<style>
+/* ===== FAMILY NAMES — PREMIUM CLASSIC SERIF ===== */
+#detailsH {
+  font-family: "Bodoni 72", Didot, "Iowan Old Style", "Palatino Linotype", Georgia, serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: clamp(1.9rem, 5vw, 3.2rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: .13em !important;
+  text-transform: uppercase;
+  color: #A88B55 !important;
+  text-shadow: 0 4px 18px rgba(168,139,85,.10);
+}
+@media (max-width: 520px) {
+  #detailsH { letter-spacing: .09em !important; }
+}
+#detailsH .family-amp {
+  color: #7A2E32 !important;
+  -webkit-text-fill-color: #7A2E32 !important;
+  font-style: italic;
+  padding: 0 .08em;
+}
+
+/* Guest name below Namaste */
+#guestSec .guest-name {
+  margin: 10px 0 0;
+  font: italic 400 clamp(1.8rem, 5vw, 3rem)/1.15 var(--serif);
+  color: var(--champ-d);
+}
+
 </style>
 
 
@@ -867,6 +909,19 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   font-family:"Cormorant Garamond", Georgia, serif;
   font-weight:600;
 }
+
+/* First main page: slightly stronger wedding announcement, lifted for better balance */
+.marriage-kicker {
+  font-size: clamp(.78rem, 2.2vw, .9rem) !important;
+  font-weight: 650;
+  letter-spacing: .34em;
+  position: relative;
+  top: -24px;
+}
+@media (max-width: 600px) {
+  .marriage-kicker { top: -18px; }
+}
+
 </style>
 
 </head>
@@ -914,7 +969,6 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
     </div>
 
     <div class="hero-bottom">
-      <p class="eyebrow h-eyebrow rise" style="--d:1.5s">We are getting married</p>
       <button type="button" class="open-btn rise" style="--d:2.1s" id="openBtn">Open Invitation
         <svg viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></button>
     </div>
@@ -930,13 +984,12 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
     <div class="bgw" data-par=".08"><img data-photo="heroPhoto" alt="" decoding="async"></div>
     <div class="ph"><b>Photo placeholder</b><span>Upload <strong>hero.jpg</strong> next to index.html</span></div>
     <div class="wrap center">
-      <p class="eyebrow rv" style="--i:2" data-cfg="blessing"></p>
+      <p class="eyebrow rv marriage-kicker" style="--i:1">WE ARE GETTING MARRIED</p>
       <h2 class="c-names" id="coupleH">
         <span class="mask"><span style="--i:3" data-cfg="groom"></span></span>
         <span class="mask amp"><span style="--i:4">&amp;</span></span>
         <span class="mask"><span style="--i:5" data-cfg="bride"></span></span>
       </h2>
-      <p class="c-meta rv" style="--i:7">WE ARE GETTING MARRIED</p>
       <span class="scroll-cue" aria-hidden="true"></span>
     </div>
   </section>
@@ -945,8 +998,8 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   <section class="sec" id="details" aria-labelledby="detailsH">
     <div class="wrap center">
       <p class="eyebrow rv">Together with their families</p>
-      <h2 class="h2 rv" id="detailsH" style="--i:1"><span data-cfg="groom"></span> <em>&amp;</em> <span data-cfg="bride"></span></h2>
-      <p class="lead rv" style="--i:2">Request the pleasure of your company as they celebrate the beginning of their forever.</p>
+      <p class="f-names rv" id="detailsH" style="--i:1">YADAV <span class="family-amp">&amp;</span> GODSE</p>
+      <p class="lead rv" style="--i:2">request the pleasure of your company as they celebrate the beginning of their forever together.</p>
       <p class="lead rv" style="--i:3">Your presence and blessings would make this beautiful celebration even more special.</p>
     </div>
   </section>
@@ -1010,10 +1063,11 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   <section class="sec" id="guestSec" aria-labelledby="guestH">
     <div class="wrap center">
       <p class="eyebrow rv">A special invitation for you</p>
-      <h2 class="h2 rv" id="guestH" style="--i:1">Namaste, <em><span data-cfg="guest"></span></em></h2>
-      <p class="lead rv" style="--i:2">With immense joy in our hearts, we invite you to join us as we begin our forever.</p>
-      <p class="lead rv" style="--i:3">Your presence and blessings would mean the world to us.</p>
-      <p class="f-names rv" style="--i:4"><span data-cfg="groom"></span> &amp; <span data-cfg="bride"></span></p>
+      <h2 class="h2 rv" id="guestH" style="--i:1">Namaste</h2>
+      <p class="guest-name rv" style="--i:2"><span data-cfg="guest"></span></p>
+      <p class="lead rv" style="--i:3">It would bring us immense joy to celebrate this special day with you.</p>
+      <p class="lead rv" style="--i:4;margin-top:22px;font-style:italic;">With love,</p>
+      <p class="f-names rv guest-couple-signature" style="--i:5"><span data-cfg="groom"></span> <span class="guest-couple-amp">&amp;</span> <span data-cfg="bride"></span></p>
     </div>
   </section>
 
@@ -1021,7 +1075,7 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   <section class="sec" id="events" aria-labelledby="evH">
     <div class="wrap center">
       <p class="eyebrow rv">The Celebrations</p>
-      <h2 class="h2 rv" id="evH" style="--i:1">Wedding <em>events</em></h2>
+      <h2 class="h2 rv" id="evH" style="--i:1">Wedding <em>Events</em></h2>
       <div class="ev-date rv" style="--i:2">13 December 2026</div>
       <div class="ev-grid" id="evGrid"></div>
       
@@ -1046,8 +1100,9 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
     <div class="wrap">
       <p class="eyebrow rv">With love and gratitude</p>
       <h2 class="f-line rvm" id="finalH"><span class="mask"><span style="--i:1" id="finalLine"></span></span></h2>
-      <p class="lead rv" style="--i:2">With love, we await your presence.</p>
-      <p class="f-names rv" style="--i:3" data-cfg="coupleText"></p>
+      <p class="lead rv" style="--i:2">Your presence will make our special day even more meaningful.</p>
+      <p class="lead rv" style="--i:3;margin-top:22px;font-style:italic;">With love,</p>
+      <p class="f-names rv" style="--i:4" data-cfg="coupleText"></p>
       <div class="row rv" style="margin-top:44px;--i:4"><button type="button" class="btn ghost" id="replayBtn" aria-label="Replay the opening">Replay Opening</button></div>
       
     </div>
@@ -1066,29 +1121,30 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
      CONFIG  -  EDIT ALL WEDDING DETAILS HERE
      ===================================================================== */
   var CONFIG = {
-    bride: "Shweta",
-    groom: "Nikhil",
+    bride: "SHWETA",
+    groom: "NIKHIL",
     date: "2026-12-13",            // YYYY-MM-DD
-    time: "19:00",                 // 24-hour HH:MM (19:00 = 7:00 PM)
+    time: "17:45",                 // 24-hour HH:MM (17:45 = 5:45 PM)
     timezone: "+05:30",            // India (Asia/Kolkata)
-    venue: "The Royal Courtyard",
-    city: "Navi Mumbai",
-    address: "The Royal Courtyard, Navi Mumbai, Maharashtra, India",
+    venue: "Hotel Vitthal Mangalam",
+    city: "Panmalewadi, Maharashtra",
+    address: "Hotel Vitthal Mangalam, Panmalewadi, Maharashtra 415015",
     heroPhoto: "hero.jpg",           // main hero photo
     scratchPhoto: "scratch.jpg",     // scratch-to-reveal photo
     countdownPhoto: "countdown.jpg", // photo below countdown
     music: "wedding-song.mp3",     // upload next to index.html
     musicVolume: 0.35,             // final volume after the fade-in
     petals: { enabled: true, desktopCount: 26, mobileCount: 14 },
-    mapsQuery: "The Royal Courtyard Navi Mumbai",
+    mapsQuery: "Hotel Vitthal Mangalam Panmalewadi Maharashtra 415015",
+    mapsUrl: "https://maps.app.goo.gl/B426cgGa9Ubu8jDS8?g_st=iw",
     fallbackGuest: "Our Dear Guest",
     blessing: "Together with our families",
     celebrateMessage: "Today we celebrate. Thank you for being part of our story.",
-    events: [                      // demo events
-      { name: "Mehendi",          date: "13 December 2026", time: "4:00 PM",  place: "The Royal Courtyard, Navi Mumbai" },
-      { name: "Haldi",            date: "13 December 2026", time: "11:00 AM", place: "The Royal Courtyard, Navi Mumbai" },
-      { name: "Wedding Ceremony", date: "13 December 2026", time: "7:00 PM",  place: "The Royal Courtyard, Navi Mumbai" },
-      { name: "Reception",        date: "13 December 2026", time: "8:00 PM",  place: "The Royal Courtyard, Navi Mumbai" }
+    events: [
+      { name: "Haldi",              date: "13 December 2026", time: "11:00 AM", place: "Hotel Vitthal Mangalam, Panmalewadi" },
+      { name: "Wedding Rituals",    date: "13 December 2026", time: "2:30 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" },
+      { name: "Wedding Ceremony",   date: "13 December 2026", time: "5:45 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" },
+      { name: "Wedding Reception",  date: "13 December 2026", time: "6:15 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" }
     ]
   };
 
@@ -1142,9 +1198,9 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
   document.title = D.coupleText + ' | Wedding Invitation';
   var first = guest ? guest.split(' ')[0] : '';
   $('finalLine').textContent = (first ? first + ', we' : 'We') + ' can\u2019t wait to celebrate with you.';
-  $('dirBtn').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.mapsQuery);
+  $('dirBtn').href = CONFIG.mapsUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.mapsQuery));
 
-  var eventPhotos = ['mehendi.jpg', 'haldi.jpg', 'wedding.jpg', 'reception.jpg'];
+  var eventPhotos = ['haldi.jpg', 'wedding.jpg', 'wedding.jpg', 'reception.jpg'];
   CONFIG.events.forEach(function (ev, i) {
     var d = document.createElement('div'), n = document.createElement('span'), h = document.createElement('h3');
     d.className = 'ev rv'; d.style.setProperty('--i', i);
@@ -1714,35 +1770,50 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
     dot.setAttribute('aria-hidden','true');
     grid.appendChild(dot);
 
-    var ticking = false;
+    var targetY = 12;
+    var currentY = 12;
+    var animating = false;
 
-    function update(){
-      ticking = false;
+    function measureTarget(){
       var rect = grid.getBoundingClientRect();
       var vh = window.innerHeight || document.documentElement.clientHeight;
       var travel = Math.max(0, grid.offsetHeight - 24);
 
       /* The active point follows the reader through the timeline. */
       var viewportGuide = vh * 0.52;
-      var y = viewportGuide - rect.top;
-      y = Math.max(12, Math.min(travel, y));
-
-      grid.style.setProperty('--scroll-dot-y', y + 'px');
+      targetY = viewportGuide - rect.top;
+      targetY = Math.max(12, Math.min(travel, targetY));
 
       var visible = rect.bottom > vh * 0.18 && rect.top < vh * 0.82;
       dot.style.opacity = visible ? '1' : '0';
     }
 
+    function animateDot(){
+      /* Ease toward the target instead of snapping to every scroll event. */
+      currentY += (targetY - currentY) * 0.16;
+      if (Math.abs(targetY - currentY) < 0.12) currentY = targetY;
+      grid.style.setProperty('--scroll-dot-y', currentY.toFixed(2) + 'px');
+
+      if (currentY !== targetY) {
+        requestAnimationFrame(animateDot);
+      } else {
+        animating = false;
+      }
+    }
+
     function requestUpdate(){
-      if(!ticking){
-        ticking = true;
-        requestAnimationFrame(update);
+      measureTarget();
+      if(!animating){
+        animating = true;
+        requestAnimationFrame(animateDot);
       }
     }
 
     window.addEventListener('scroll', requestUpdate, {passive:true});
     window.addEventListener('resize', requestUpdate);
-    update();
+    measureTarget();
+    currentY = targetY;
+    grid.style.setProperty('--scroll-dot-y', currentY.toFixed(2) + 'px');
   }
 
   if(document.readyState === 'loading'){
