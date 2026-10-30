@@ -212,7 +212,24 @@ button { font: inherit; color: inherit; }
 @keyframes shimmer { from { background-position: 0 0; } to { background-position: 100% 0; } }
 .c-names .amp { font-style: italic; font-size: .5em; -webkit-text-fill-color: var(--champ); color: var(--champ); }
 .c-meta { margin: 30px 0 0; font: 600 clamp(.9rem, 2.8vw, 1.15rem)/1.7 var(--sans); letter-spacing: .3em; text-transform: uppercase; }
-.scroll-cue { display: block; width: 1px; height: 54px; margin: 44px auto 0; background: linear-gradient(var(--champ), transparent); animation: cue 2.4s ease-in-out infinite; transform-origin: top; }
+.venue-scroll-note {
+  max-width: 620px;
+  margin: 66px auto 2px;
+  padding: 0 18px;
+  font: 500 clamp(.78rem, 2vw, .95rem)/1.55 var(--sans);
+  letter-spacing: .055em;
+  color: rgba(255,248,230,.96);
+  text-shadow:
+    0 0 7px rgba(232,214,165,.72),
+    0 0 18px rgba(200,180,138,.48),
+    0 2px 16px rgba(0,0,0,.58);
+  animation: venueTextGlow 2.8s ease-in-out infinite;
+}
+@keyframes venueTextGlow {
+  0%,100% { opacity:.82; text-shadow:0 0 5px rgba(232,214,165,.48),0 0 14px rgba(200,180,138,.30),0 2px 16px rgba(0,0,0,.58); }
+  50% { opacity:1; text-shadow:0 0 9px rgba(255,241,198,.90),0 0 24px rgba(200,180,138,.62),0 2px 18px rgba(0,0,0,.62); }
+}
+.scroll-cue { display: block; width: 1px; height: 54px; margin: 2px auto 0; background: linear-gradient(var(--champ), transparent); animation: cue 2.4s ease-in-out infinite; transform-origin: top; }
 @keyframes cue { 0%, 100% { transform: scaleY(.3); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
 .ph { display: none; position: absolute; inset: 0; z-index: 1; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px; text-align: center; font: 400 1rem/1.6 var(--sans); color: var(--ivory);
   background: repeating-linear-gradient(45deg, rgba(200, 180, 138, .1) 0 10px, transparent 10px 20px), linear-gradient(160deg, #3a342b, #2a2621); }
@@ -1016,6 +1033,7 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
         <span class="mask amp"><span style="--i:4">&amp;</span></span>
         <span class="mask"><span style="--i:5" data-cfg="bride"></span></span>
       </h2>
+      <p class="venue-scroll-note rv" style="--i:6">Please scroll down to view the wedding venue and location details.</p>
       <span class="scroll-cue" aria-hidden="true"></span>
     </div>
   </section>
@@ -1152,25 +1170,25 @@ body.scroll-cue-ready:not(.at-page-end) #weddingScrollCue{
     date: "2026-12-13",            // YYYY-MM-DD
     time: "17:45",                 // 24-hour HH:MM (17:45 = 5:45 PM)
     timezone: "+05:30",            // India (Asia/Kolkata)
-    venue: "Hotel Vitthal Mangalam",
-    city: "Panmalewadi, Maharashtra",
-    address: "Hotel Vitthal Mangalam, Panmalewadi, Maharashtra 415015",
+    venue: "Hotel Vithal Mangalam",
+    city: "Satara",
+    address: "Hotel Vithal Mangalam, Satara, Maharashtra",
     heroPhoto: "hero.jpg",           // main hero photo
     scratchPhoto: "scratch.jpg",     // scratch-to-reveal photo
     countdownPhoto: "countdown.jpg", // photo below countdown
     music: "wedding-song.mp3",     // upload next to index.html
     musicVolume: 0.35,             // final volume after the fade-in
     petals: { enabled: true, desktopCount: 26, mobileCount: 14 },
-    mapsQuery: "Hotel Vitthal Mangalam Panmalewadi Maharashtra 415015",
+    mapsQuery: "Hotel Vithal Mangalam Satara Maharashtra",
     mapsUrl: "https://maps.app.goo.gl/B426cgGa9Ubu8jDS8?g_st=iw",
     fallbackGuest: "Our Dear Guest",
     blessing: "Together with our families",
     celebrateMessage: "Today we celebrate. Thank you for being part of our story.",
     events: [
-      { name: "Haldi",              date: "13 December 2026", time: "11:00 AM", place: "Hotel Vitthal Mangalam, Panmalewadi" },
-      { name: "Wedding Rituals",    date: "13 December 2026", time: "2:30 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" },
-      { name: "Wedding Ceremony",   date: "13 December 2026", time: "5:45 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" },
-      { name: "Wedding Reception",  date: "13 December 2026", time: "6:15 PM",  place: "Hotel Vitthal Mangalam, Panmalewadi" }
+      { name: "Haldi",              date: "13 December 2026", time: "11:00 AM", place: "Hotel Vithal Mangalam, Satara" },
+      { name: "Wedding Rituals",    date: "13 December 2026", time: "2:30 PM",  place: "Hotel Vithal Mangalam, Satara" },
+      { name: "Wedding Ceremony",   date: "13 December 2026", time: "5:45 PM",  place: "Hotel Vithal Mangalam, Satara" },
+      { name: "Wedding Reception",  date: "13 December 2026", time: "6:15 PM",  place: "Hotel Vithal Mangalam, Satara" }
     ]
   };
 
